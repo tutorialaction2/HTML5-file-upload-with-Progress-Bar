@@ -26,16 +26,21 @@
 
     background: #DC6552;
 
-    font-size:14px;
+   
+
+}
+.status{
+  width:200px;
+
+  font-size:14px;
 
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 
     text-align:center;
 
-    color:#fff;
+     color:#DC6552;
 
     font-weight:bold;
-
 }
 </style>
 </head>
@@ -48,12 +53,13 @@
 <!-- Progress Bar -->
 <div class="progresslayer" >
    <div class="progressbar" > </div>
-</div>
+</div><p id="status" class="status"></p>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
 
 $(function(){
 var progressBar = $(".progressbar");
+var status = $("#status");
 var progressBarWidth = 200;
 
 /* This is the width of Progress Bar. You can change it as your requirements and also change it in
@@ -65,6 +71,8 @@ $("#form").submit(function(){
 if($("#file").val().length!=0){
 
 $(".progresslayer").show();
+
+status.text("");
 
 var uploadUrl = $(this).attr("action");
 
@@ -110,6 +118,8 @@ function progressHandler(event)
 
   var percent = Math.round((event.loaded / event.total) * 100);
 
+   status.text(percent+" %");
+   
    var p = Math.round((progressBarWidth/100)*percent);
 
    progressBar.css("width",p+"px");
@@ -126,7 +136,8 @@ function completeHandler(event){
 
   if(response =="Success")  {
 
-    progressBar.text("Successfully Uploaded");
+    
+    status.text("Successfully Uploaded");
 
   }
 
